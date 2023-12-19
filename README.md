@@ -56,6 +56,7 @@
 - [ ] Storyteller's Haven: Weave intricate narratives and share your stories with a community passionate about the written word.
 
 - [ ] Reflective Articles: Explore reflections on life, love, and the human experience through thought-provoking articles.
+- [ ] Find articles by category or type
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
