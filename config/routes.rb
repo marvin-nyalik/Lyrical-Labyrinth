@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'categories/new'
+  get 'categories/create'
+  get 'categories/destroy'
+  get 'tags/new'
+  get 'tags/create'
+  get 'tags/destroy'
+  get 'comments/new'
+  get 'comments/create'
+  get 'comments/destroy'
+  get 'posts/new'
+  get 'posts/index'
+  get 'posts/show'
+  get 'posts/create'
+  get 'posts/destroy'
   root 'pages#home'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
