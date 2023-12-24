@@ -1,28 +1,14 @@
 <%= form_with model: @post, url: posts_path, method: :post do |form| %>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
 
-    <%= form.label :summary %>
-    <%= form.text_field :summary %>
+  <%= render 'form_fields', form: form %>
+  <%= form.submit 'Create Post' %>
 
-    <%= form.label :photo_url %>
-    <%= form.text_field :photo_url %>
-
-    <div class="field">
-        <%= form.label :category_id, 'Select Category' %>
-        <%= form.collection_select :category_id, Category.all, :id, :name, prompt: 'Choose a category' %>
-    </div>
-
-    <div class="field">
-        <%= form.label :tag_ids, 'Add Tags' %>
-        <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, prompt: 'Add tags' %>
-    </div>
-
-    <div class="field">
-      <%= form.label :body %>
-      <%= form.text_area :body %>
-    </div>
-
-    <%= form.submit 'Create Post' %>
 <% end %>
-  
+
+<% if flash[:error_messages] %>
+  <div class="alert alert-danger">
+    <% flash[:error_messages].each do |message| %>
+      <%= message %><br>
+    <% end %>
+  </div>
+<% end %>

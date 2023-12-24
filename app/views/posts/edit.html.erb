@@ -1,25 +1,6 @@
-<%= form_with model: @post, url: posts_path, method: :post do |form| %>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+<%= form_with model: @post, url: post_path(@post), method: :patch do |form| %>
 
-    <%= form.label :summary %>
-    <%= form.text_field :summary %>
-
-    <%= form.label :photo_url %>
-    <%= form.text_field :photo_url %>
-
-    <div class="field">
-        <%= form.label :category_id, 'Select Category' %>
-        <%= form.collection_select :category_id, Category.all, :id, :name, prompt: 'Choose a category' %>
-    </div>
-
-    <div class="field">
-        <%= form.label :tag_ids, 'Add Tags' %>
-        <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, prompt: 'Add tags' %>
-    </div>
-  <div class="field", style="padding:5px; height: 400px; margin: 20px;">
-    <%= form.label :body %>
-    <%= form.rich_text_area :body, value: "<h1>Default message</h1>"%>
-  </div>
-    <%= form.submit 'Create Post' %>
+  <%= render 'form_fields', form: form %>
+  <%= form.submit 'Update Post' %>
+  
 <% end %>

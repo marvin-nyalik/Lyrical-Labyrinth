@@ -1,15 +1,8 @@
 <h1>Pages - home</h1>
-<%= link_to 'Post', posts_path %>
-
-
 <% if current_user %>
-    <%= link_to 'Add Article', new_post_path %>
-
     <h2><%= current_user.email %></h2>
     <h2><%= current_user.full_name %></h2>
     <img src=<%= current_user.avatar_url%>>
-
-    <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
 <% else %>
     <%= link_to "Login", new_user_session_path %>
     <%= link_to "Create Account", new_user_registration_path %>
