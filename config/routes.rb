@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-
-  resources :posts do
+  resources :posts, param: :slug do
     resources :comments
+  end
+
+  resources :tags, param: :slug, only: [:create, :new]
+  resources :categories, param: :slug, only: [:create, :new] do
+    member do 
+      get :edit
+      patch :update
+    end
   end
 
   root 'pages#home'
