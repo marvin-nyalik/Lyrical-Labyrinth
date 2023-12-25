@@ -1,0 +1,14 @@
+<%= form_with model: @post, url: posts_path, method: :post do |form| %>
+
+  <%= render 'form_fields', form: form %>
+  <%= form.submit 'Create Post' %>
+
+<% end %>
+
+<% if flash[:error_messages] %>
+  <div class="alert alert-danger">
+    <% flash[:error_messages].each do |message| %>
+      <%= message %><br>
+    <% end %>
+  </div>
+<% end %>

@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :posts, param: :slug do
+    resources :comments
+  end
+
+  resources :tags, param: :slug, only: [:create, :new]
+  resources :categories, param: :slug, only: [:create, :new] do
+    member do 
+      get :edit
+      patch :update
+    end
+  end
+
   root 'pages#home'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -11,6 +23,4 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

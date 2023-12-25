@@ -1,0 +1,6 @@
+<%= form_with model: @post, url: post_path(@post), method: :patch do |form| %>
+
+  <%= render 'form_fields', form: form %>
+  <%= form.submit 'Update Post' %>
+  
+<% end %>

@@ -1,0 +1,29 @@
+<div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
+</div>
+
+<div class="field">
+    <%= form.label :summary %>
+    <%= form.text_field :summary, required: true %>
+</div>
+
+<div class="field">
+    <%= form.label :photo_url %>
+    <%= form.text_field :photo_url, required: true %>
+</div>
+
+<div class="field">
+    <%= form.label :category_id, 'Select Category' %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: 'Choose a category' }, required: true %>
+</div>
+
+<div class="field">
+    <%= form.label :tag_ids, 'Add Tags' %>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, { prompt: 'Add tags' } %>
+</div>
+
+<div class="field">
+    <%= form.label :body %>
+    <%= form.rich_text_area :body, required: true %>
+</div>

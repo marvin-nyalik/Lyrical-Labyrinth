@@ -1,0 +1,16 @@
+<h1>Add New Category</h1>
+<p>Be cautios, we do not need meaningless categories</p>
+
+<%= form_with model:@category, url: categories_path, method: :post do |form| %>
+    <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, required: true %>
+    </div>
+
+    <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, required: true %>
+    </div>
+
+    <%= form.submit "Create Category" %>
+<% end %>

@@ -1,0 +1,19 @@
+<h1><%= @post.title %> in CATEGORY: <%= @post.category.name %> </h1> 
+<%= link_to 'Back', posts_path %>
+<%= link_to 'Edit', edit_post_path %>
+
+<p>Posted On <%= formatted_time(@post.created_at) %> by <%= @post.user.full_name %> </p>
+TAGS:
+<% @post.tags.each do |tag| %>
+    <p><%= tag.name %></p>
+<% end %>
+<img src="<%= @post.photo_url %>" alt="Image Description">
+
+SUMMARY: <%= @post.summary %>
+BODY: <%= @post.body %>
+
+<%= render 'comments/new' %>
+
+<% @post.comments.each do |comment| %>
+    <p> <%= comment.body %> </p>
+<% end %>

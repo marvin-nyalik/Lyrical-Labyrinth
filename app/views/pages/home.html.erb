@@ -1,11 +1,11 @@
 <h1>Pages - home</h1>
-
 <% if current_user %>
     <h2><%= current_user.email %></h2>
     <h2><%= current_user.full_name %></h2>
     <img src=<%= current_user.avatar_url%>>
-
-    <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+    <% if @notifications.size > 0 %>
+        <p>You have <%= @notifications.size %> new notification(s).</p>
+    <% end %>
 <% else %>
     <%= link_to "Login", new_user_session_path %>
     <%= link_to "Create Account", new_user_registration_path %>
