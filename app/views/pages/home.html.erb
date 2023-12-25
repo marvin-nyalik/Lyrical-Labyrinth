@@ -3,6 +3,9 @@
     <h2><%= current_user.email %></h2>
     <h2><%= current_user.full_name %></h2>
     <img src=<%= current_user.avatar_url%>>
+    <% if @notifications.size > 0 %>
+        <p>You have <%= @notifications.size %> new notification(s).</p>
+    <% end %>
 <% else %>
     <%= link_to "Login", new_user_session_path %>
     <%= link_to "Create Account", new_user_registration_path %>
