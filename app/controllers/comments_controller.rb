@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  require_relative '../services/comment_service'
+
   before_action :authenticate_user!
   before_action :set_post
 
@@ -7,14 +9,12 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @post.comments.build(comment_params)
+    comment_service = CommentService.new(@post, current_user, comment_params)
 
-    if @comment.save
+    if comment_service.create_comment_with_notifications
       redirect_to @post, notice: 'Your comment was added'
     else
-      flash[:alert] = 'Comment addition failed'
-      flash[:error_messages] = @comment.errors.full_messages
-      render 'comments/new'
+      redirect_to @post, alert: 'Comment not created'
     end
   end
 
