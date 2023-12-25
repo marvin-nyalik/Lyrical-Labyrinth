@@ -24,7 +24,6 @@ class CommentsController < ApplicationController
     redirect_to @post, notice: 'Comment successfully deleted'
   end
 
-
   private
 
   def comment_params
