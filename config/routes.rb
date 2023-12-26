@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
   resources :posts, param: :slug do
     resources :comments do
       member do 
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: [:index]
   resources :tags, only: [:create, :new]
   resources :categories, param: :slug, only: [:create, :new] do
     member do 
