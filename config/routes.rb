@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   resources :posts, param: :slug do
-    resources :comments
+    resources :comments do
+      member do 
+        post 'reply_to_comment'
+      end
+    end
   end
 
-  resources :tags, param: :slug, only: [:create, :new]
+  resources :tags, only: [:create, :new]
   resources :categories, param: :slug, only: [:create, :new] do
     member do 
       get :edit
