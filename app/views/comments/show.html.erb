@@ -1,0 +1,21 @@
+<div>
+  <%= link_to 'Back', post_path(slug: @p_comment.post.slug)%>
+
+  <p> <%= @p_comment.body%> </p>
+
+  <%= form_with model: @reply, url: reply_to_comment_post_comment_path(post_slug: @p_comment.post.slug, id: @p_comment.id), method: :post do |form| %>
+    <h3>Reply to this comment</h3>
+
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_area :body, required: true %>
+    </div>
+    
+    <%= form.submit 'Reply' %>
+  <% end %>
+  <% if @p_comment.replies %>
+    <% @p_comment.replies.each do |comment| %>
+      <p><%= comment.body %></p> 
+    <% end %>
+  <% end %>
+</div>

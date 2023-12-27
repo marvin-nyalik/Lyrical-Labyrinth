@@ -16,4 +16,5 @@ BODY: <%= @post.body %>
 
 <% @post.comments.each do |comment| %>
     <p> <%= comment.body %> </p>
+    <%= link_to 'reply', post_comment_path(post_slug: @post.slug, id: comment.id) %>
 <% end %>
