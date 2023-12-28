@@ -1,0 +1,10 @@
+<%= form_with model: @comment, url: update_reply_post_comment_path(post_slug: params[:post_slug], id: @comment.id), method: :patch do |form| %>
+    <h3>Comment on this post</h3>
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_area :body, required: true %>
+    </div>
+    
+    <%= form.submit 'Edit' %>
+<% end %>
+  
