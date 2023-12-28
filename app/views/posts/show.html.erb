@@ -13,8 +13,16 @@ SUMMARY: <%= @post.summary %>
 BODY: <%= @post.body %>
 
 <%= render 'comments/new' %>
-
+<p><%= @post.comments_count %> <%= 'comment'.pluralize(@post.comments_count)%></p>
 <% @post.comments.each do |comment| %>
-    <p> <%= comment.body %> </p>
-    <%= link_to 'reply', post_comment_path(post_slug: @post.slug, id: comment.id) %>
+    <div style="margin: 5px auto;">
+        <p> <%= comment.body %> </p>
+        <%= link_to post_comment_path(post_slug: @post.slug, id: comment.id) do %>
+            <button>reply</button>
+        <% end %>
+        <%= link_to edit_post_comment_path(post_slug: @post.slug, id: comment.id) do %>
+            <button>edit</button>
+        <% end %>
+        <span><%= comment.replies.count %> <%= 'reply'.pluralize(comment.replies.count) %> </span>
+    </div>
 <% end %>

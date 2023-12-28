@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :comments do
       member do 
         post 'reply_to_comment'
+        get 'edit_reply'
+        patch 'update_reply'
       end
     end
   end
