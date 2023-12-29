@@ -21,9 +21,19 @@
     <%= link_to 'Articles', posts_path %>
       <% if current_user %>
         <%= button_to 'Logout', destroy_user_session_path, data: {turbo: "false"}, method: :delete  %>
-        <%= link_to 'New Article', new_post_path %>
-        <%= link_to 'New Tag', new_tag_path %>
-        <%= link_to 'Add Category', new_category_path %>
+        
+        <% if can? :create, Post %>
+          <%= link_to 'New Article', new_post_path %>
+        <% end %>
+
+        <% if can? :create, Tag %>
+          <%= link_to 'New Tag', new_tag_path %>
+        <% end %>
+
+        <% if can? :create, Category %>
+          <%= link_to 'Add Category', new_category_path %>
+        <% end %>
+
         <%= link_to 'Notifications', notifications_path %>
       <% else %>
         <%= link_to 'Login', new_user_session_path %>
