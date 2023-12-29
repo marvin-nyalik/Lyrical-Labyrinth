@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   has_many :posts, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :comments, dependent: :destroy

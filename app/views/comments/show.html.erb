@@ -18,9 +18,11 @@
       <div> 
         <strong><%= comment.user.full_name %></strong>
         <p><%= comment.body %></p>
-        <%= link_to edit_reply_post_comment_path(post_slug: params[:post_slug], id: comment.id) do %>
-          <button>edit</button>
-        <% end %> 
+        <% if can? :update, comment %>
+          <%= link_to edit_reply_post_comment_path(post_slug: params[:post_slug], id: comment.id) do %>
+            <button>edit</button>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   <% end %>

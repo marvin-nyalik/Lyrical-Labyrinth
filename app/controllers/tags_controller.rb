@@ -1,10 +1,13 @@
 class TagsController < ApplicationController
   before_action :authenticate_user!
   def new
+    authorize! :create, Tag
     @tag = Tag.new
   end
 
   def create
+    authorize! :create, @tag
+
     @tag = Tag.new(tag_params)
 
     if @tag.save

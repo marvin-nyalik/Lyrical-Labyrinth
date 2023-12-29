@@ -1,6 +1,9 @@
 <h1><%= @post.title %> in CATEGORY: <%= @post.category.name %> </h1> 
 <%= link_to 'Back', posts_path %>
-<%= link_to 'Edit', edit_post_path %>
+
+<% if can? :update, @post%>
+    <%= link_to 'Edit', edit_post_path %>
+<% end %>
 
 <p>Posted On <%= formatted_time(@post.created_at) %> by <%= @post.user.full_name %> </p>
 TAGS:
@@ -20,8 +23,10 @@ BODY: <%= @post.body %>
         <%= link_to post_comment_path(post_slug: @post.slug, id: comment.id) do %>
             <button>reply</button>
         <% end %>
-        <%= link_to edit_post_comment_path(post_slug: @post.slug, id: comment.id) do %>
-            <button>edit</button>
+        <% if can? :update, comment %>
+            <%= link_to edit_post_comment_path(post_slug: @post.slug, id: comment.id) do %>
+                <button>edit</button>
+            <% end %>
         <% end %>
         <span><%= comment.replies.count %> <%= 'reply'.pluralize(comment.replies.count) %> </span>
     </div>
