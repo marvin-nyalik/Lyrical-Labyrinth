@@ -2,10 +2,13 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    authorize! :create, Category
     @category = Category.new
   end
 
   def create
+    authorize! :create, @category
+
     @category = Category.new(category_params)
 
     if @category.save

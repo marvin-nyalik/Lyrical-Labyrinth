@@ -31,6 +31,8 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize! :update, @comment
+
     if @comment.update(comment_update_params)
       redirect_to post_path(slug: @comment.post.slug), notice: 'Comment edited'
     else
@@ -39,6 +41,8 @@ class CommentsController < ApplicationController
   end
 
   def update_reply
+    authorize! :update, @comment
+
     if @comment.update(comment_update_params)
       redirect_to post_comment_path(post_slug: params[:post_slug], id: @comment.parent.id), notice: 'Reply edited'
     else
@@ -47,7 +51,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    authorize! :destroy, @comment
+
     @comment.destroy
     redirect_to @post, notice: 'Comment successfully deleted'
   end

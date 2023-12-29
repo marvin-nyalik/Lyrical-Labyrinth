@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :select_post, only: %i[show destroy edit update]
 
   def new
+    authorize! :create, Post
     @post = Post.new
   end
 
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
   def show; end
 
   def create
+    authorize! :create, Post
     @post = current_user.posts.build(post_params)
 
     if @post.save
@@ -29,6 +31,8 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
+    authorize! :update, @post
+
     if @post.update(post_params)
       redirect_to @post, notice: 'Post was successfully updated.'
     else
@@ -36,7 +40,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    authorize! :destroy, @post
+  end
 
   private
 
