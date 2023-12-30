@@ -16,6 +16,7 @@ SUMMARY: <%= @post.summary %>
 BODY: <%= @post.body %>
 
 <%= render 'comments/new' %>
+
 <p><%= @post.comments_count %> <%= 'comment'.pluralize(@post.comments_count)%></p>
 <% @post.comments.each do |comment| %>
     <div style="margin: 5px auto;">

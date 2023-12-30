@@ -10,6 +10,20 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: {
+          posts: @posts,
+          meta: {
+            total_pages: @posts.total_pages,
+            current_page: @posts.current_page,
+            total_items: @posts.total_entries
+          }
+        }, status: :ok
+      end
+    end
   end
 
   def show; end
@@ -18,13 +32,21 @@ class PostsController < ApplicationController
     authorize! :create, Post
     @post = current_user.posts.build(post_params)
 
-    if @post.save
-      flash[:success] = 'Post successfully created'
-      redirect_to post_path(@post)
-    else
-      flash[:alert] = 'Failed to build post'
-      flash[:error_messages] = @post.errors.full_messages
-      render :new
+    respond_to do |format|
+      if @post.save
+        format.html do
+          flash[:success] = 'Post successfully created'
+          redirect_to post_path(@post)
+        end
+        format.json { render json: { post: @post, message: 'Post successfully created' }, status: :created }
+      else
+        format.html do
+          flash[:alert] = 'Failed to build post'
+          flash[:error_messages] = @post.errors.full_messages
+          render :new
+        end
+        format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -33,10 +55,14 @@ class PostsController < ApplicationController
   def update
     authorize! :update, @post
 
-    if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
-    else
-      render :edit, notice: 'Post was not updated!!'
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.json { render json: { post: @post, message: 'Post was successfully updated.' }, status: :ok }
+      else
+        format.html { render :edit, notice: 'Post was not updated!!' }
+        format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
