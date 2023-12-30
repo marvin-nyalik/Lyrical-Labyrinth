@@ -11,10 +11,14 @@ class CategoriesController < ApplicationController
 
     @category = Category.new(category_params)
 
-    if @category.save
-      redirect_to root_path, notice: "Category #{@category.name} added"
-    else
-      render :new, notice: 'Category addition failed'
+    respond_to do |format|
+      if @category.save
+        format.html { redirect_to root_path, notice: "Category #{@category.name} added" }
+        format.json { render json: { message: "Category #{@category.name} added" }, status: :created }
+      else
+        format.html { render :new, notice: 'Category addition failed' }
+        format.json { render json: { errors: @category.errors }, status: :unprocessable_entity }
+      end
     end
   end
 
