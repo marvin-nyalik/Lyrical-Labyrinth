@@ -10,10 +10,14 @@ class TagsController < ApplicationController
 
     @tag = Tag.new(tag_params)
 
-    if @tag.save
-      redirect_to root_path, notice: "Tag - #{@tag.name} successfully created"
-    else
-      render :new, notice: "Unauthorized action for #{current_user.full_name}"
+    respond_to do |format|
+      if @tag.save
+        format.html { redirect_to root_path, notice: "Tag - #{@tag.name} successfully created" }
+        format.json { render json: { message: "Tag - #{@tag.name} successfully created" }, status: :created }
+      else
+        format.html { render :new, alert: 'You are not authorized to create a tag. Please contact admin.' }
+        format.json { render json: { errors: @tag.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 

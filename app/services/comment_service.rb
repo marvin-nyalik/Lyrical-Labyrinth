@@ -13,9 +13,9 @@ class CommentService
 
     if comment.save
       notify_post_author(@post.user, @user, comment)
-      true
+      { success: true, comment: }
     else
-      false
+      { success: false, errors: comment.errors.full_messages }
     end
   end
 
@@ -25,9 +25,9 @@ class CommentService
 
     if reply.save
       notify_comment_author(@post.user, @user, reply)
-      true
+      { success: true, reply: }
     else
-      false
+      { success: false, errors: reply.errors.full_messages }
     end
   end
 
