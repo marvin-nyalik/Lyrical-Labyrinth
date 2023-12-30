@@ -6,5 +6,10 @@ class PagesController < ApplicationController
     @notifications.each do |n|
       n.update(read: true)
     end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { notifications: @notifications }, status: :ok }
+    end
   end
 end
