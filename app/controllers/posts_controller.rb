@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include PostsHelper
+  include FilterableConcern
   before_action :authenticate_user!, except: %i[index show]
   before_action :select_post, only: %i[show destroy edit update]
 
@@ -69,6 +70,12 @@ class PostsController < ApplicationController
   def destroy
     authorize! :destroy, @post
   end
+
+  def poems; end
+
+  def reflections; end
+
+  def scars; end
 
   private
 
