@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   include PostsHelper
-  before_action :authenticate_user!, except: %i[index show]
+  include FilterableConcern
+  before_action :authenticate_user!, except: %i[index show tagged categorized]
   before_action :select_post, only: %i[show destroy edit update]
 
   def new
@@ -68,6 +69,18 @@ class PostsController < ApplicationController
 
   def destroy
     authorize! :destroy, @post
+  end
+
+  def tagged
+    @tag = Tag.find_by(name: params[:tag_name])
+    @posts = @tag.posts.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    render 'index'
+  end
+
+  def categorized
+    @category = Category.find_by(name: params[:category_name])
+    @posts = @category.posts.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    render 'index'
   end
 
   private
