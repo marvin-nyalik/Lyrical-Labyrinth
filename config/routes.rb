@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
   get 'notifications/index'
-  get '/poems', to: 'posts#poems', as: 'poems'
-  get '/reflections', to: 'posts#reflections', as: 'reflections'
-  get '/scars', to: 'posts#scars', as: 'scars'
+  get '/posts/tags/:tag_name', to: 'posts#tagged', as: 'tagged'
+  get '/posts/categories/:category_name', to: 'posts#categorized', as: 'categorized'
 
   resources :posts, param: :slug do
     resources :comments do
