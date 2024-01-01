@@ -1,7 +1,12 @@
 <h1>All Posts</h1>
 
-<% @posts.each do |post| %>
-  <%= render 'post', post: post %>
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <%= render 'post', post: post %>
+  <% end %>
+
+  <%= will_paginate @posts %>
+<% else %>
+  <p>No posts available in this category.</p>
 <% end %>
 
-<%= will_paginate @posts %>

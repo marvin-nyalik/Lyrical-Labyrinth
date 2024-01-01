@@ -7,9 +7,13 @@
 
 <p>Posted On <%= formatted_time(@post.created_at) %> by <%= @post.user.full_name %> </p>
 TAGS:
+
 <% @post.tags.each do |tag| %>
-    <p><%= tag.name %></p>
+    <%= link_to tagged_path(tag.name) do %>
+      <span><%= tag.name.capitalize %></span>
+    <% end %>
 <% end %>
+
 <img src="<%= @post.photo_url %>" alt="Image Description">
 
 SUMMARY: <%= @post.summary %>
