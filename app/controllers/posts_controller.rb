@@ -40,6 +40,7 @@ class PostsController < ApplicationController
           redirect_to post_path(@post)
         end
         format.json { render json: { post: @post, message: 'Post successfully created' }, status: :created }
+        UserMailer.article_create_mail(@post.user).deliver_now
       else
         format.html do
           flash[:alert] = 'Failed to build post'
