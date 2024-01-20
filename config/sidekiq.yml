@@ -1,0 +1,35 @@
+:queues:
+  - default
+
+development:
+  :concurrency: 1
+  :logfile: ./log/sidekiq.log
+  :url: redis://localhost:6379/0
+
+:schedule:
+  cleanup_notifications:
+    every: '5m'
+    class: 'CleanupNotificationsWorker'
+
+# development:
+#   :concurrency: 5
+#   :logfile: ./log/sidekiq.log
+#   :url: redis://localhost:6379/0
+#   :queues:
+#     - default
+#     - high_priority
+#   :priority:
+#     - 0: 2    # Concurrency for default priority (default queue)
+#     - 10: 3   # Concurrency for higher priority (high_priority queue)
+
+
+# production:
+#   :concurrency: 5
+#   :logfile: ./log/sidekiq.log
+#   :url: redis://localhost:6379/0
+#   :queues:
+#     - default: 2
+#     - high_priority: 3
+
+
+# MyWorker.perform_async('arg1', 'arg2', priority: 10)
