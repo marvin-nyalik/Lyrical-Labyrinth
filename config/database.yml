@@ -22,9 +22,9 @@ default: &default
 development:
   <<: *default
   database: lyrical_labyrinth_development
-  username: postgres
-  password: root
-  hostname: localhost
+  username: <%= ENV['DB_USER'] || 'postgres' %>
+  password: <%= ENV['DB_PASSWORD'] || 'password' %>
+  host: <%= ENV['DB_HOST'] || 'localhost' %>
   port: 5432
 
   # The specified database role being used to connect to PostgreSQL.
@@ -60,9 +60,9 @@ development:
 test:
   <<: *default
   database: lyrical_labyrinth_test
-  username: postgres
-  password: root
-  hostname: localhost
+  username: 'postgres'
+  password: 'root'
+  hostname: 'localhost'
   port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
