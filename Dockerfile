@@ -9,9 +9,9 @@ WORKDIR /rails
 
 # Set production environment
 ENV RAILS_ENV="development" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development" \
+    BUNDLE_DEPLOYMENT="0" \
+    BUNDLE_PATH="./vendor/bundle" \
+    BUNDLE_WITHOUT="" \
     RAILS_MASTER_KEY="a4d22b57d9981ff136b0bf4c4e8533b9"
 
 
