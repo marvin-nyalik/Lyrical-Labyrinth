@@ -1,12 +1,21 @@
-<h1>All Posts</h1>
+<div class="prose">
+  <% if @posts.any? %>
+    <% @posts.each_with_index do |post, index| %>
+      <% if index == 0 %>
+        <% link_to post do%>
+          <div>
+              <img src=<%= post.photo_url %> alt="#{post.photo_url}"
+              style="width: 50rem; height: 40rem; object-fit: cover;">
+              <p></p>
+          </div>
+        <% end %>
+      <% else %>
+        <%= render 'post', post: post %>
+      <% end %>
+    <% end %>
 
-<% if @posts.any? %>
-  <% @posts.each do |post| %>
-    <%= render 'post', post: post %>
-  <% end %>
-
-  <%= will_paginate @posts %>
-<% else %>
+    <%= will_paginate @posts %>
+  <% else %>
   <p>No posts available in this category.</p>
-<% end %>
-
+  <% end %>
+</div>

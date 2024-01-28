@@ -304,6 +304,10 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.1.0)
+    tailwindcss-rails (2.3.0-x64-mingw-ucrt)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.3.0-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.3.0)
     timeout (0.4.1)
     trix (0.10.1)
@@ -362,6 +366,7 @@ DEPENDENCIES
   sidekiq
   sprockets-rails
   stimulus-rails
+  tailwindcss-rails (~> 2.3)
   trix
   turbo-rails
   tzinfo-data
