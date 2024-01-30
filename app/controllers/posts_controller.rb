@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    @posts = Post.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 7)
 
     respond_to do |format|
       format.html
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html do
-          flash[:success] = 'Post successfully created'
+          flash[:notice] = 'Post successfully created'
           redirect_to post_path(@post)
         end
         format.json { render json: { post: @post, message: 'Post successfully created' }, status: :created }
