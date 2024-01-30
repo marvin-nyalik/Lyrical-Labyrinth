@@ -1,22 +1,46 @@
-.alert, .notice {
-  position: absolute;
-  top: 20px;
-  right: 0;
-  width: 80rem;
-  height: 30px;
-  font-size: 20px;
-  z-index: 5;
-  color: black;
-}
-
 body {
   box-sizing: border-box;
   background: rgb(235, 239, 240);
 }
 
-@media screen and (max-width: 768px){
-  .alert, .notice {
-    height: 20%;
+.tip {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: 500px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 18px;
+  padding: 3px;
+  z-index: 5;
+  border-radius: 7px;
+  background: white;
+}
+
+.alert {
+  border: 3px solid rgb(18, 145, 203);
+  color: black;
+}
+
+.notice {
+  border: 3px solid green;
+  color: black;
+}
+
+.field input {
+  border-radius: 4px;
+}
+
+.link-text {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .tip {
     font-size: 15px;
+    width: 70vw;
+    font-size: 12px;
   }
 }
