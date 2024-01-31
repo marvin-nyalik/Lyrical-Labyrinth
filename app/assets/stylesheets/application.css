@@ -37,10 +37,93 @@ body {
   text-decoration: none;
 }
 
+.no-underline-link {
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 20px;
+}
+
+.title-link a {
+  text-decoration: none;
+  color: rgb(6, 39, 56);
+}
+
+.hero-image {
+  width: 95%;
+  height: 80vh;
+  object-fit: cover;
+  object-position: top left;
+  margin: 10px auto;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  color: white;
+  font-size: 22px;
+  width: 80%;
+  text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.card {
+  width: 18rem;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.card-image {
+  width: 18rem;
+  height: 12rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cards-container {
+  width: 95%;
+  margin: 10px auto;
+  position: relative;
+  left: 1%;
+}
+
+#desktop-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: rgb(6, 39, 56);
+  list-style-type: none;
+}
+
 @media screen and (max-width: 768px) {
+  .cards-container {
+    left: 0;
+  }
+
+  #desktop-menu {
+    display: none;
+  }
+
   .tip {
     font-size: 15px;
     width: 70vw;
     font-size: 12px;
+  }
+
+  .hero-image {
+    width: 90%;
+  }
+
+  .card {
+    width: 98%;
+    margin: 5px auto;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    object-position: center;
   }
 }
