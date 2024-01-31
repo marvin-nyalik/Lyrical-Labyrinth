@@ -1,21 +1,57 @@
-<div class="prose">
-  <% if @posts.any? %>
-    <% @posts.each_with_index do |post, index| %>
-      <% if index == 0 %>
-        <% link_to post do%>
-          <div>
-              <img src=<%= post.photo_url %> alt="#{post.photo_url}"
-              style="width: 50rem; height: 40rem; object-fit: cover;">
-              <p></p>
+<div class="container">
+  <% if @first_post %>
+    <%= link_to @first_post do %>
+    <div style="position: relative; width: 97%; margin: 10px auto;">
+      <img src=<%= @first_post.photo_url %> 
+           alt="<%= @first_post.photo_url %>" 
+           class="hero-image rounded" />
+      <div class="hero-text">
+        <p> <%= @first_post.title.upcase %> - <%= @first_post.user.full_name %> <br> </p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+
+  <% if @sub_posts.present? %>
+  <div class="row justify-content-start cards-container">
+    <% @sub_posts.each_with_index do |post, index| %>
+          <div class="col-md-4">
+            <%= link_to post, style: "text-decoration: none;" do %>
+            <div class="post my-2 card">
+              <img src="<%= post.photo_url %>"  
+                   class="img-fluid card-image"
+                   alt="<%= post.photo_url %>"
+                   style="margin: 0 0;"
+              >
+              <div style="display: flex; flex-direction: column; height: 10rem;">
+                <p class="lead title-link" style="padding-left: 5px; margin: 5px 5px;"><%= post.title.titleize[0, 20] %>...</p>
+
+                <div style="display: flex; justify-content: space-between;">
+                <span class="badge mx-1 text-center", style="height: 22px; background: rgb(6, 39, 56); color: white; text-decoration: none;">
+                  <%= post.category.name %>
+                </span>
+
+                <span style="padding-right: 4px; font-weight: 400; color: grey;"> <%= formatted_time(post.updated_at)%> </span>
+
+                </div>
+                <div style="display: flex; justify-content: flex-start; padding: 0 2px; border-top: 1px solid lightgray; margin: 5px 0; height: 80px;">
+                  <% post.tags.each do |tag| %>
+                      <div>
+                          <%= link_to tagged_path(tag.name) do %>
+                            <span class="badge mx-1 text-center mr-2"
+                                  style="background: brown;"><%= tag.name.capitalize %></span>
+                          <% end %>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <% end %>
           </div>
         <% end %>
-      <% else %>
-        <%= render 'post', post: post %>
-      <% end %>
-    <% end %>
-
-    <%= will_paginate @posts %>
+    <%= will_paginate @sub_posts %>
+    </div>
   <% else %>
-  <p>No posts available in this category.</p>
+  <p>No posts available by your filter.</p>
   <% end %>
 </div>
