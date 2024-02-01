@@ -1,8 +1,8 @@
-<div class="container">
-    <div style="width: 90%; margin: 10px auto; flex-direction: column; display: flex; justify-content: center;">
-        <div class="row d-flex justify-content-center" style="width: 95%;">
-            <div class="col-sm-12 col-lg-12" style="margin: 5px auto;">
-                <img src="<%= @post.photo_url %>" alt="Image Description" style="width: 95vw; height: 90vh; object-fit: cover; object-position: center;">
+<div class="container-fluid">
+    <div style="width: 95%; margin: 0 auto;">
+        <div class="row d-flex justify-content-center" style="width: 100%; margin: 0 auto;">
+            <div style="margin: 0 auto; width: 100%;">
+                <img src="<%= @post.photo_url %>" alt="<%= @post.photo_url %>" class="show-image">
             </div>
         </div>
 

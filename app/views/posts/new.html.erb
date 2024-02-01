@@ -1,7 +1,11 @@
 <%= form_with model: @post, url: posts_path, method: :post do |form| %>
 
   <%= render 'form_fields', form: form %>
-  <%= form.submit 'Create Post' %>
+  <div style="display: flex; justify-content: flex-end; width: 80%; margin: 10px auto;">
+      <div style="float-right">
+        <%= form.submit 'Create Post', class:"btn btn-info" %>
+      </div>
+  </div>
 
 <% end %>
 
