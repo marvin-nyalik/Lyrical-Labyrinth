@@ -1,10 +1,13 @@
 <%= form_with model: @comment, url: post_comments_path(post_slug: @post.slug), method: :post do |form| %>
-    <h3>Comment on this post</h3>
-    <div class="field">
-      <%= form.label :body %>
-      <%= form.text_area :body, required: true %>
+    <div class="row d-flex field" style="border-top: 1px solid grey;">
+      <h4>Leave a comment</h4>
+      <%= form.text_area :body, required: true, placeholder: "Leave a comment..", 
+      style: "border: 1px solid lightgray; border-radius: 5px; height: 150px;" %>
     </div>
-    
-    <%= form.submit 'Comment' %>
+    <div class="row d-flex justify-content-end">
+      <div class="col-sm-4 d-flex justify-content-end">
+        <%= form.submit 'Comment', class:"btn btn-success my-1 text-dark float-right" %>
+      </div>
+    </div>
 <% end %>
   

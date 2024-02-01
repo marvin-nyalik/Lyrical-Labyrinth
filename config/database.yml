@@ -89,4 +89,4 @@ production:
   <<: *default
   database: lyrical_labyrinth_production
   username: lyrical_labyrinth
-  password: <%= ENV["LYRICAL_LABYRINTH_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>

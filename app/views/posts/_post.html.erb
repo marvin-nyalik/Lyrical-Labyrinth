@@ -1,9 +1,9 @@
-<div class="post prose">
+<div>
   <%= link_to post do %>
-    <div style="width: 70%; margin: 50px auto; text-decoration: none;">
-      <h2><%= post.title %></h2>
-      <img src=<%= post.photo_url %> alt="#{post.photo_url}"
-       style="width: 20rem; height: 20rem; object-fit: cover;">
+    <div style="width: 90%; margin: 20px auto; text-decoration: none;">
+      <h2 class="link-text"> <%= post.title %></h2>
+      <img src=<%= post.photo_url %> alt="<%= post.photo_url %>"
+       style="width: 90%; height: 50%; object-fit: cover;">
     </div>
   <% end %>
 </div>

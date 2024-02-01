@@ -1,38 +1,79 @@
-<h1><%= @post.title %> in CATEGORY: <%= @post.category.name %> </h1> 
-<%= link_to 'Back', posts_path %>
+<div class="container-fluid">
+    <div style="width: 95%; margin: 0 auto;">
+        <div class="row d-flex justify-content-center" style="width: 100%; margin: 0 auto;">
+            <div style="margin: 0 auto; width: 100%;">
+                <img src="<%= @post.photo_url %>" alt="<%= @post.photo_url %>" class="show-image">
+            </div>
+        </div>
 
-<% if can? :update, @post%>
-    <%= link_to 'Edit', edit_post_path %>
-<% end %>
+        <h1><%= @post.title %> </h1>
+        <div style="display: flex; justify-content: flex-start;">
+            <div>
+                <%= link_to categorized_path(@post.category.name) do %>
+                    <span class="badge mx-1 bg-dark text-center" style="height: 22px;"><%= @post.category.name %></span>
+                <% end %>
+            </div>
+            <div>
+                <%= link_to posts_path do %>
+                    <span class="badge mx-1 bg-info text-center" style="height: 22px;">More Articles</span>
+                <% end %>
+            </div>
+            <div>
+                <% if can? :update, @post%>
+                    <%= link_to edit_post_path do %>
+                        <span class="badge mx-1 bg-warning text-center" style="height: 22px;">Edit</span>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
 
-<p>Posted On <%= formatted_time(@post.created_at) %> by <%= @post.user.full_name %> </p>
-TAGS:
+        <div class="row">
+            <p class="lead"><%= formatted_time(@post.created_at) %> by <%= @post.user.full_name %> </p>
+        </div>
 
-<% @post.tags.each do |tag| %>
-    <%= link_to tagged_path(tag.name) do %>
-      <span><%= tag.name.capitalize %></span>
-    <% end %>
-<% end %>
-
-<img src="<%= @post.photo_url %>" alt="Image Description">
-
-SUMMARY: <%= @post.summary %>
-BODY: <%= @post.body %>
-
-<%= render 'comments/new' %>
-
-<p><%= @post.comments_count %> <%= 'comment'.pluralize(@post.comments_count)%></p>
-<% @post.comments.each do |comment| %>
-    <div style="margin: 5px auto;">
-        <p> <%= comment.body %> </p>
-        <%= link_to post_comment_path(post_slug: @post.slug, id: comment.id) do %>
-            <button>reply</button>
-        <% end %>
-        <% if can? :update, comment %>
-            <%= link_to edit_post_comment_path(post_slug: @post.slug, id: comment.id) do %>
-                <button>edit</button>
+        <div style="display: flex; justify-content: flex-start;">
+            <% @post.tags.each do |tag| %>
+                <div>
+                    <%= link_to tagged_path(tag.name) do %>
+                        <span class="badge mx-1 bg-success text-center mr-2"><%= tag.name.capitalize %></span>
+                    <% end %>
+                </div>
             <% end %>
-        <% end %>
-        <span><%= comment.replies.count %> <%= 'reply'.pluralize(comment.replies.count) %> </span>
+        </div>
+
+        <small class="my-4 text-light bg-secondary font-italic text-center" style="padding: 3px; border-radius: 5px;"> "<%= @post.summary %>" </small>
+        <div>
+            <%= @post.body %>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" style="width: 85%; margin: 10px auto;">
+  <%= render 'comments/new' %>
+</div>
+
+<p style="margin: 5px auto; width: 85%;" class="fw-bold">
+  <%= @post.comments_count %> <%= 'comment'.pluralize(@post.comments_count)%>
+</p>
+<% @post.comments.each do |comment| %>
+    <div style="margin: 5px auto; padding: 5px; width: 85%; border-bottom: 1px solid lightgray; border-radius: 5px; background: rgb(235, 239, 240, 0.5);">
+        <p class="fw-bold"><%= comment.user.full_name %></p>
+        <p> <%= comment.body %> </p>
+        <div class="row d-flex justify-content-between">
+            <div class="col-sm-6">
+                <%= link_to post_comment_path(post_slug: @post.slug, id: comment.id) do %>
+                    <i class='bx bx-reply' style="text-decoration: none"> 
+                    <%= comment.replies.count %> <%= 'reply'.pluralize(comment.replies.count) %> </i>
+                <% end %>
+            </div>
+            <div class="col-sm-6">
+                <% if can? :update, comment %>
+                    <%= link_to edit_post_comment_path(post_slug: @post.slug, id: comment.id) do %>
+                        <i class='bx bxs-comment-edit' style="text-decoration: none"> edit</i>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
     </div>
 <% end %>

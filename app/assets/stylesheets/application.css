@@ -1,0 +1,176 @@
+body {
+  box-sizing: border-box;
+  background: rgb(235, 239, 240);
+  overflow-x: hidden;
+}
+
+.tip {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 18px;
+  padding: 3px;
+  z-index: 5;
+  border-radius: 7px;
+  background: white;
+}
+
+.peek {
+  color: white;
+  font-size: 18px;
+  margin: 5px auto;
+}
+
+.alert {
+  border: 3px solid rgb(18, 145, 203);
+  color: black;
+}
+
+.notice {
+  border: 3px solid green;
+  color: black;
+}
+
+.field input {
+  border-radius: 4px;
+}
+
+.link-text {
+  text-decoration: none;
+}
+
+.no-underline-link {
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 20px;
+}
+
+.title-link a {
+  text-decoration: none;
+  color: rgb(6, 39, 56);
+}
+
+.hero-image {
+  width: 95%;
+  height: 80vh;
+  object-fit: cover;
+  object-position: top left;
+  margin: 10px auto;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  color: white;
+  font-size: 22px;
+  width: 80%;
+  text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.card {
+  width: 18rem;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.card-image {
+  width: 18rem;
+  height: 12rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cards-container {
+  width: 95%;
+  margin: 10px auto;
+  position: relative;
+  left: 1%;
+}
+
+#desktop-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: rgb(6, 39, 56);
+  list-style-type: none;
+}
+
+.show-image-cover {
+  width: 90%;
+  margin: 10px auto;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+.show-image {
+  width: 90%;
+  height: 90vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.bar {
+  height: 18vh;
+}
+
+@media screen and (max-width: 768px) {
+  .cards-container {
+    left: 0;
+  }
+
+  .bar {
+    height: 20vh;
+  }
+
+  .peek {
+    display: none;
+  }
+
+  .show-image-cover {
+    width: 98%;
+  }
+
+  .show-image {
+    width: 98vw;
+    height: 80vh;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #desktop-menu {
+    display: none;
+  }
+
+  .no-underline-link {
+    font-size: 15px;
+  }
+
+  .tip {
+    width: 70vw;
+    font-size: 12px;
+  }
+
+  .hero-image {
+    width: 90%;
+  }
+
+  .card {
+    width: 98%;
+    margin: 5px auto;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    object-position: center;
+  }
+}

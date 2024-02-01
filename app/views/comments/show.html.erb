@@ -1,26 +1,38 @@
-<div>
-  <%= link_to 'Back', post_path(slug: params[:post_slug])%>
-  <p> <%= @p_comment.body%> </p>
+<div class="container">
+  <%= link_to post_path(slug: params[:post_slug]) do %>
+    <span class="badge mr-1 bg-dark text-center" style="height: 24px;">Back</span>
+  <% end %>
+
+  <h5 class="fw-bold my-3">Reply to <%= @p_comment.user.full_name %>'s comment on <%= @p_comment.post.title %></h5>
+
+  <div style="display: flex; flex-direction: column;">
+    <p class="fw-bold" style="margin: 5px 0;"> <%= @p_comment.user.full_name %></p>
+    <p> <%= @p_comment.body %></p>
+  </div>
 
   <%= form_with model: @reply, url: reply_to_comment_post_comment_path(post_slug: params[:post_slug] || @p_comment.post.slug , id: @p_comment.id), method: :post do |form| %>
-    <h3>Reply to this comment</h3>
-
-    <div class="field">
-      <%= form.label :body %>
-      <%= form.text_area :body, required: true %>
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-12">
+        <%= form.text_area :body, required: true, placeholder: "Reply to this comment..",
+        style: "border: 1px solid lightgray; border-radius: 5px; height: 150px; width: 90%;" %>
+      </div>
     </div>
-    <%= form.submit 'Reply' %>
+    <div style="width: 90%; display: flex; justify-content: flex-end;">
+      <div>
+        <%= form.submit 'Reply', class:"btn btn-success my-1 text-dark float-right" %>
+      </div>
+    </div>
   <% end %>
   <br>
   <% if @p_comment.replies %>
   <%= @p_comment.replies.count %> <%= 'reply'.pluralize(@p_comment.replies.count) %>
     <% @p_comment.replies.each do |comment| %>
-      <div> 
+      <div class="my-2" style="width: 90%; background: rgb(235, 239, 240, 0.5); padding: 5px;  border-bottom: 1px solid lightgray; border-radius: 5px;"> 
         <strong><%= comment.user.full_name %></strong>
         <p><%= comment.body %></p>
         <% if can? :update, comment %>
           <%= link_to edit_reply_post_comment_path(post_slug: params[:post_slug], id: comment.id) do %>
-            <button>edit</button>
+            <i class='bx bxs-comment-edit' style="text-decoration: none"> edit</i>
           <% end %>
         <% end %>
       </div>

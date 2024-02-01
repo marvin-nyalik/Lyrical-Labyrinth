@@ -10,7 +10,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    @posts = Post.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 7)
+    @first_post = @posts.first
+    @sub_posts = @posts.offset(1)
 
     respond_to do |format|
       format.html
@@ -36,7 +38,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html do
-          flash[:success] = 'Post successfully created'
+          flash[:notice] = 'Post successfully created'
           redirect_to post_path(@post)
         end
         format.json { render json: { post: @post, message: 'Post successfully created' }, status: :created }
@@ -62,7 +64,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render json: { post: @post, message: 'Post was successfully updated.' }, status: :ok }
       else
-        format.html { render :edit, notice: 'Post was not updated!!' }
+        format.html { render :edit, alert: 'Post was not updated!!' }
         format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
       end
     end
@@ -74,13 +76,17 @@ class PostsController < ApplicationController
 
   def tagged
     @tag = Tag.find_by(name: params[:tag_name])
-    @posts = @tag.posts.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    @posts = @tag.posts.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 7)
+    @first_post = @posts.first
+    @sub_posts = @posts.offset(1)
     render 'index'
   end
 
   def categorized
     @category = Category.find_by(name: params[:category_name])
-    @posts = @category.posts.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    @posts = @category.posts.includes(:comments).order(created_at: :desc).paginate(page: params[:page], per_page: 7)
+    @first_post = @posts.first
+    @sub_posts = @posts.offset(1)
     render 'index'
   end
 
