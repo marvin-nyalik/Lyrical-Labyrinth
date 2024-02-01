@@ -1,6 +1,7 @@
 body {
   box-sizing: border-box;
   background: rgb(235, 239, 240);
+  overflow-x: hidden;
 }
 
 .tip {
@@ -17,6 +18,12 @@ body {
   z-index: 5;
   border-radius: 7px;
   background: white;
+}
+
+.peek {
+  color: white;
+  font-size: 18px;
+  margin: 5px auto;
 }
 
 .alert {
@@ -94,13 +101,55 @@ body {
   list-style-type: none;
 }
 
+.show-image-cover {
+  width: 90%;
+  margin: 10px auto;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+.show-image {
+  width: 90%;
+  height: 90vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.bar {
+  height: 18vh;
+}
+
 @media screen and (max-width: 768px) {
   .cards-container {
     left: 0;
   }
 
+  .bar {
+    height: 20vh;
+  }
+
+  .peek {
+    display: none;
+  }
+
+  .show-image-cover {
+    width: 98%;
+  }
+
+  .show-image {
+    width: 98vw;
+    height: 80vh;
+    object-fit: cover;
+    object-position: center;
+  }
+
   #desktop-menu {
     display: none;
+  }
+
+  .no-underline-link {
+    font-size: 15px;
   }
 
   .tip {

@@ -16,7 +16,7 @@
     <%= javascript_include_tag 'index' %>
   </head>
 
-  <body class="mx-auto bg-light prose">
+  <body class="mx-auto bg-light prose" style="overflow-x: hidden;">
     <% if flash[:notice] %>
       <p class="notice tip"><%= notice %></p>
     <% end %>
@@ -25,54 +25,63 @@
     <% end %>
 
     <div class="row d-flex justify-content-between">
-      <div class="col-md-3">
+      <div class="col-md-3 d-flex flex-row justify-content-between bar">
         <%= link_to root_path, class: "navbar-brand" do %>
           <%= image_tag("the_logo.PNG", alt: "Lyrical labyrinth logo", width: 50, height: 50, class: "d-inline-block align-text-top") %>
         <% end %>
+        
+        <i class='bx bx-menu bx-md d-md-none' id="menubar" 
+           style="position: relative; top: 8vh;">
+        </i>
       </div>
-      <i class='bx bx-menu d-md-none' id="menubar"></i>
 
       <div class="col-md-9">
         <ul class="navbar-nav" id="desktop-menu">
-            <%= content_tag(:li, class: "nav-item") do %>
-              <%= link_to 'Articles', posts_path, class: "nav-link no-underline-link" %>
+            <%= content_tag(:li) do %>
+              <%= link_to 'Articles', posts_path, class: "no-underline-link" %>
             <% end %>
 
             <% @categories.each do |category| %>
-              <%= content_tag(:li, class: "nav-item") do %>
-                <%= link_to category.name.capitalize, categorized_path(category.name), class: "nav-link mx-1 no-underline-link" %>
+              <%= content_tag(:li) do %>
+                <%= link_to category.name.capitalize, categorized_path(category.name), class: "mx-1 no-underline-link" %>
               <% end %>
             <% end %>
 
             <% if current_user %>
               <% if can? :create, Post %>
-                <%= content_tag(:li, class: "nav-item") do %>
-                  <%= link_to 'New Article', new_post_path, class: "nav-link mx-1 no-underline-link" %>
+                <%= content_tag(:li) do %>
+                  <%= link_to new_post_path, class: "mx-1 no-underline-link" do %>
+                    <i class='bx bx-message-square-add bx-md'></i>
+                  <% end %>
                 <% end %>
               <% end %>
 
               <% if can? :create, Tag %>
-                <%= content_tag(:li, class: "nav-item") do %>
-                  <%= link_to 'New Tag', new_tag_path, class: "nav-link mx-1 no-underline-link" %>
+                <%= content_tag(:li) do %>
+                  <%= link_to 'New Tag', new_tag_path, class: "mx-1 no-underline-link" %>
                 <% end %>
               <% end %>
 
               <% if can? :create, Category %>
-                <%= content_tag(:li, class: "nav-item") do %>
-                  <%= link_to 'Add Category', new_category_path, class: "nav-link mx-1 no-underline-link" %>
+                <%= content_tag(:li) do %>
+                  <%= link_to 'Add Category', new_category_path, class: "mx-1 no-underline-link" %>
                 <% end %>
               <% end %>
 
-              <%= content_tag(:li, class: "nav-item") do %>
-                <%= link_to 'Notifications', notifications_path, class: "nav-link mx-1 no-underline-link" %>
+              <%= content_tag(:li) do %>
+                <%= link_to notifications_path, class: "mx-1 no-underline-link" do %>
+                  <i class='bx bxs-bell bx-md'></i>
+                <% end %>
               <% end %>
 
-              <%= content_tag(:li, class: "nav-item text-decoration-none") do %>
-                <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link mx-1 no-underline-link", data: { turbo: "false" } %>
+              <%= content_tag(:li) do %>
+                <%= button_to destroy_user_session_path, method: :delete, class: "mx-1 no-underline-link", data: { turbo: "false" } do %>
+                  <i class='bx bx-log-out bx-md'></i>
+                <% end %>
               <% end %>   
             <% else %>
-              <%= content_tag(:li, class: "nav-item text-decoration-none") do %>
-                <%= link_to 'Login', new_user_session_path, class: "nav-link mx-1 no-underline-link" %>
+              <%= content_tag(:li) do %>
+                <%= link_to 'Login', new_user_session_path, class: "mx-1 no-underline-link" %>
               <% end %>
             <% end %>
           </ul>
@@ -80,18 +89,17 @@
     </div>
   <%= yield %>
   
-  <div class="row my-5" style="background: rgb(1, 15, 32);">
-  <% if request.user_agent =~ /Mobile|webOS/ %>
-    <%= image_tag("the_logo.PNG", alt: "Mobile Image", style: "width: 18rem; height: 16rem; margin: 20px auto;", class: "d-inline-block align-text-top img-fluid rounded my-3") %>
-  <% else %>
-    <%= image_tag("scaler.PNG", alt: "Desktop Image", style: "width: 50%; height: 50%; margin: 20px auto;", class: "d-inline-block align-text-top img-fluid rounded") %>
-  <% end %>
-
-</div>
+  <div class="my-3" style="background: rgb(1, 15, 32); width: 95%; margin 0 auto; display: flex; justify-content: center;">
+    <% if request.user_agent =~ /Mobile|webOS/ %>
+      <%= image_tag("the_logo.PNG", alt: "Mobile Image", style: "width: 16rem; height: 14rem; margin: 20px auto;") %>
+    <% else %>
+      <%= image_tag("scaler.PNG", alt: "Desktop Image", style: "width: 50%; height: 50%; margin: 20px auto;", class: "d-inline-block align-text-top img-fluid rounded") %>
+    <% end %>
+  </div>
 
 
   <div class="row my-3 bg-light text-dark mx-auto text-center fw-bold"
-  style="border-top: 2px solid grey; font-size: 18px;">
+       style="border-top: 2px solid grey; font-size: 18px;">
       <p>&copy; 2024 | All Rights Reserved | Lyrical Labyrinth </p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
