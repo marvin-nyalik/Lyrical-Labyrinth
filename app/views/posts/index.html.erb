@@ -6,7 +6,8 @@
            alt="<%= @first_post.photo_url %>" 
            class="hero-image rounded" />
       <div class="hero-text">
-        <p> <%= @first_post.title.upcase %> - <%= @first_post.user.full_name %> <br> </p>
+        <p><%= @first_post.title.upcase %> - <%= @first_post.user.full_name %> <br> </p>
+        <p class="peek"><%= @first_post.summary[0,25] %> | ...READ MORE </p>
       </div>
     </div>
     <% end %>
@@ -24,7 +25,7 @@
                    style="margin: 0 0;"
               >
               <div style="display: flex; flex-direction: column; height: 10rem;">
-                <p class="lead title-link" style="padding-left: 5px; margin: 5px 5px;"><%= post.title.titleize[0, 20] %>...</p>
+                <p class="lead title-link" style="padding-left: 5px; margin: 5px 5px;"><%= post.title.titleize[0, 25] %>...</p>
 
                 <div style="display: flex; justify-content: space-between;">
                 <span class="badge mx-1 text-center", style="height: 22px; background: rgb(6, 39, 56); color: white; text-decoration: none;">
