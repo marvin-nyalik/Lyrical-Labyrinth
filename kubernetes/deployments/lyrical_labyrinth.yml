@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lyrical-labyrinth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lyrical-labyrinth
+  template:
+    metadata:
+      labels:
+        app: lyrical-labyrinth
+    spec:
+      containers:
+        - name: lyrical-labyrinth
+          image: vegasmarvin/lyrical_labyrinth:v1.0
+          command: ["./bin/rails", "server"]
+          env:
+            - name: RAILS_ENV
+              value: ${RAILS_ENV}
+            - name: POSTGRES_HOST
+              value: ${POSTGRES_HOST}
+            - name: POSTGRES_DB
+              value: ${POSTGRES_DB}
+            - name: POSTGRES_USER
+              value: ${POSTGRES_USER}
+            - name: POSTGRES_PASSWORD
+              value: ${POSTGRES_PASSWORD}
+            - name: RAILS_MASTER_KEY
+              value: ${RAILS_MASTER_KEY}
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: app-storage
+              mountPath: /store
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lyrical-labyrinth
+spec:
+  selector:
+    app: lyrical-labyrinth
+  ports:
+    - protocol: TCP
+      port: 3000
+      NodePort: 3000
