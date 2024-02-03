@@ -11,12 +11,18 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/app/lib/data
   redis:
     image: redis:6.2-alpine
     ports:
       - "6379:6379"
-  demo-web:
-    build: .
+    volumes:
+      - redis_data:/data
+
+  lyrical-labyrinth:
+    image: vegasmarvin/lyrical_labyrinth:v1.0
+    container_name: lyrical-labyrinth
     command: "./bin/rails server"
     environment:
       - RAILS_ENV=${RAILS_ENV}
@@ -30,8 +36,10 @@ services:
       - redis
     ports:
       - "3000:3000"
+    volumes:
+      - app_storage:/store
 
 volumes:
   postgres_data: {}
-  app-storage: {}
+  app_storage: {}
   redis_data: {}
