@@ -1,16 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-postgres-14.2
+  name: postgres
+  labels:
+    app: postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-postgres-14.2
+      app: postgres
   template:
     metadata:
       labels:
-        app: demo-postgres-14.2
+        app: postgres
     spec:
       containers:
         - name: db
@@ -18,24 +20,30 @@ spec:
           command: ["postgres", "-c", "max_connections=500"]
           env:
             - name: POSTGRES_DB
-              value: ${POSTGRES_DB}
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
             - name: POSTGRES_USER
-              value: ${POSTGRES_USER}
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
-              value: ${POSTGRES_PASSWORD}
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
           ports:
             - containerPort: 5432
-          volumeMounts:
-            - name: postgres-data
-              mountPath: /var/lib/postgresql/data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-postgres-14.2
+  name: postgres-service
 spec:
   selector:
-    app: demo-postgres-14.2
+    app: postgres
   ports:
     - protocol: TCP
       port: 5432
