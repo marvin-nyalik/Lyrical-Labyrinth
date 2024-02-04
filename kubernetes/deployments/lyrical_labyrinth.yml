@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lyrical-labyrinth
+  labels:
+    app: lyrical-labyrinth
 spec:
   replicas: 1
   selector:
@@ -15,34 +17,53 @@ spec:
       containers:
         - name: lyrical-labyrinth
           image: vegasmarvin/lyrical_labyrinth:v1.0
+          envFrom:
+           - configMapRef:
+             name: rails-config
           command: ["./bin/rails", "server"]
           env:
             - name: RAILS_ENV
-              value: ${RAILS_ENV}
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: RAILS_ENV
             - name: POSTGRES_HOST
-              value: ${POSTGRES_HOST}
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_HOST
             - name: POSTGRES_DB
-              value: ${POSTGRES_DB}
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
             - name: POSTGRES_USER
-              value: ${POSTGRES_USER}
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
-              value: ${POSTGRES_PASSWORD}
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
             - name: RAILS_MASTER_KEY
-              value: ${RAILS_MASTER_KEY}
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: RAILS_MASTER_KEY
           ports:
             - containerPort: 3000
-          volumeMounts:
-            - name: app-storage
-              mountPath: /store
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: lyrical-labyrinth
 spec:
+  type: NodePort
   selector:
     app: lyrical-labyrinth
   ports:
     - protocol: TCP
       port: 3000
-      NodePort: 3000
+      nodePort: 30100
