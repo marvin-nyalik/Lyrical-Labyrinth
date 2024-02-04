@@ -17,14 +17,11 @@ spec:
           image: redis:6.2-alpine
           ports:
             - containerPort: 6379
-          volumeMounts:
-            - name: redis-data
-              mountPath: /data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis
+  name: redis-service
 spec:
   selector:
     app: redis
