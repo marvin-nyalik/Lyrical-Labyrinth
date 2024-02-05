@@ -17,9 +17,6 @@ spec:
       containers:
         - name: lyrical-labyrinth
           image: vegasmarvin/lyrical_labyrinth:v1.0
-          envFrom:
-           - configMapRef:
-             name: rails-config
           command: ["./bin/rails", "server"]
           env:
             - name: RAILS_ENV
