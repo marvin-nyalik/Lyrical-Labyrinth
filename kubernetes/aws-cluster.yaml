@@ -9,3 +9,7 @@ nodeGroups:
   - name: lyrical-lab-nodes
     instanceType: t2.micro
     desiredCapacity: 1
+    minSize: 1
+    maxSize: 3
+    tags:
+      nodegroup-type: worker
