@@ -57,10 +57,9 @@ kind: Service
 metadata:
   name: lyrical-labyrinth
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: lyrical-labyrinth
   ports:
     - protocol: TCP
       port: 3000
-      nodePort: 30100
