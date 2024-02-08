@@ -8,12 +8,11 @@ FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 WORKDIR /rails
 
 # Set production environment
-ENV RAILS_ENV="development" \
-    BUNDLE_DEPLOYMENT="0" \
-    BUNDLE_PATH="./vendor/bundle" \
-    BUNDLE_WITHOUT="" \
+ENV RAILS_LOG_TO_STDOUT="1" \
+    RAILS_SERVE_STATIC_FILES="true" \
+    RAILS_ENV="production" \
+    BUNDLE_WITHOUT="development" \
     RAILS_MASTER_KEY="a4d22b57d9981ff136b0bf4c4e8533b9"
-
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -48,7 +47,7 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+    apt-get install -y build-essential libvips bash bash-completion libffi-dev tzdata postgresql nodejs npm yarn && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application

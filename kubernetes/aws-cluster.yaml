@@ -1,0 +1,15 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: lyrical-lab
+  region: eu-north-1
+
+nodeGroups:
+  - name: lyrical-lab-nodes
+    instanceType: t2.micro
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 3
+    tags:
+      nodegroup-type: worker
