@@ -2,34 +2,38 @@ version: '3'
 services:
   db:
     image: postgres:16.1-alpine
-    container_name: demo-postgres-14.2
+    container_name: postgres_cont
     command: 
       "postgres -c 'max_connections=500'"
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=lyrical_lab_prod
+      - POSTGRES_USER=marvin
+      - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/app/lib/data
+    networks:   
+      - my-network
+
   redis:
     image: redis:6.2-alpine
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:   
+      - my-network
 
   lyrical-labyrinth:
     image: vegasmarvin/lyrical_labyrinth:v1.0
     container_name: lyrical-labyrinth
     command: "./bin/rails server"
     environment:
-      - RAILS_ENV=${RAILS_ENV}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=lyrical_lab_prod
+      - POSTGRES_USER=marvin
+      - POSTGRES_PASSWORD=password
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     depends_on:
       - db
@@ -38,6 +42,11 @@ services:
       - "3000:3000"
     volumes:
       - app_storage:/store
+    networks: 
+      - my-network
+
+networks:   
+  my-network:
 
 volumes:
   postgres_data: {}
