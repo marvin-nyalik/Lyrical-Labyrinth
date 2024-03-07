@@ -13,7 +13,10 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 gem 'sidekiq'
 gem 'trix'
 gem 'will_paginate'
-
+gem 'yabeda-prometheus'
+gem 'yabeda-rails'
+gem 'yabeda-puma-plugin'
+gem 'yabeda-sidekiq'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.1'
 
