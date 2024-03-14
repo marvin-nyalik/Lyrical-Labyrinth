@@ -2,7 +2,7 @@ global:
   smtp_smarthost: 'smtp.gmail.com:587'
   smtp_from: 'otienomarvin7@gmail.com'
   smtp_auth_username: 'otienomarvin7@gmail.com'
-  smtp_auth_password: 'averylongpwd@23'
+  smtp_auth_password: ''
 route:
   group_by: ['alertname']
   group_wait: 30s
