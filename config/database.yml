@@ -16,8 +16,8 @@ development:
 test:
   <<: *default
   database: lyrical_labyrinth_test
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  username: postgres
+  password: root
 
 production:
   <<: *default
