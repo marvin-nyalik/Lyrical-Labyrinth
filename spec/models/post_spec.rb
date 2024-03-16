@@ -1,9 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  it "Validates presence of title, body and photo URL" do
-    post = Post.new(title: nil, body: nil, photo_url: nil)
-    expect(post).not_to be_valid
-    expect(post.errors[:title]).to include("can't be blank")
+  it "has a valid factory" do
+    post = FactoryBot.build(:post)
+    expect(post).to be_valid
+  end
+
+  it 'is invalid without a title' do
+    post = FactoryBot.build(:post, title: nil)
+    expect(post).to_not be_valid
+  end
+
+  it 'is invalid without a photo url' do
+    post = FactoryBot.build(:post, photo_url: nil)
+    expect(post).to_not be_valid
+  end
+
+  it 'is invalid without a body' do
+    post = FactoryBot.build(:post, body: nil)
+    expect(post).to_not be_valid
   end
 end
