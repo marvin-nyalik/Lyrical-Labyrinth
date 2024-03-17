@@ -65,6 +65,7 @@ group :development, :test do
   gem 'capybara'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
+  gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
