@@ -4,12 +4,12 @@
 <%= form_with model:@category, url: categories_path, method: :post do |form| %>
     <div class="field">
         <%= form.label :name %>
-        <%= form.text_field :name, required: true %>
+        <%= form.text_field :name, required: true, id:"name_field" %>
     </div>
 
     <div class="field">
         <%= form.label :description %>
-        <%= form.text_area :description, required: true %>
+        <%= form.text_area :description, required: true, id:"desc_field" %>
     </div>
 
     <%= form.submit "Create Category" %>
