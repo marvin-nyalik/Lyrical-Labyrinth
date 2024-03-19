@@ -38,7 +38,7 @@
       <div class="col-md-9">
         <ul class="navbar-nav" id="desktop-menu">
             <%= content_tag(:li) do %>
-              <%= link_to 'Articles', posts_path, class: "no-underline-link" %>
+              <%= link_to 'Articles', posts_path, class: "no-underline-link", id:"articles" %>
             <% end %>
 
             <% @categories.each do |category| %>
@@ -58,7 +58,7 @@
 
               <% if can? :create, Tag %>
                 <%= content_tag(:li) do %>
-                  <%= link_to 'New Tag', new_tag_path, class: "mx-1 no-underline-link" %>
+                  <%= link_to 'New Tag', new_tag_path, class: "mx-1 no-underline-link", id:"add_tag" %>
                 <% end %>
               <% end %>
 
