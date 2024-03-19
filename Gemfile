@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 gem 'cancancan'
 gem 'devise'
+gem 'diff-lcs', '~> 1.5.1'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'friendly_id'
 gem 'omniauth'
@@ -13,7 +14,6 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 gem 'sidekiq'
 gem 'trix'
 gem 'will_paginate'
-gem 'diff-lcs', '~> 1.5.1'
 gem 'yabeda-prometheus'
 gem 'yabeda-puma-plugin'
 gem 'yabeda-rails'
@@ -63,9 +63,9 @@ gem 'image_processing', '~> 1.2'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'capybara'
+  gem 'database_cleaner'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
-  gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
 end

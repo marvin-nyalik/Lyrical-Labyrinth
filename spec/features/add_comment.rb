@@ -1,8 +1,9 @@
+# rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
 RSpec.describe 'Add Comment', type: :feature do
   before(:each) do
-    user = FactoryBot.create(:user, email: 'user2@example.com', password: 'password', admin: true)
+    FactoryBot.create(:user, email: 'user2@example.com', password: 'password', admin: true)
     visit new_user_session_path
     fill_in 'Email', with: 'user2@example.com'
     fill_in 'Password', with: 'password'
@@ -10,7 +11,7 @@ RSpec.describe 'Add Comment', type: :feature do
     expect(page).to have_content 'Signed in successfully.'
 
     page.execute_script("document.querySelector('p.notice.tip').style.visibility = 'hidden'")
-    click_link('add_tag')      
+    click_link('add_tag')
     expect(page).to have_content 'Add New Tag'
     fill_in 'name_field', with: 'Tag1'
     fill_in 'desc_field', with: 'Tag1 Desc'
@@ -19,7 +20,7 @@ RSpec.describe 'Add Comment', type: :feature do
     expect(page).to have_content 'Tag - Tag1 successfully created'
 
     page.execute_script("document.querySelector('p.notice.tip').style.visibility = 'hidden'")
-    click_link('add_category')      
+    click_link('add_category')
     expect(page).to have_content 'Add New Category'
     fill_in 'name_field', with: 'Category1'
     fill_in 'desc_field', with: 'Category1 Desc'
@@ -53,3 +54,4 @@ RSpec.describe 'Add Comment', type: :feature do
     expect(page).to have_content 'Your comment was added'
   end
 end
+# rubocop:enable Metrics/BlockLength
