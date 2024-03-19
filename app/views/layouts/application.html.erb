@@ -38,7 +38,7 @@
       <div class="col-md-9">
         <ul class="navbar-nav" id="desktop-menu">
             <%= content_tag(:li) do %>
-              <%= link_to 'Articles', posts_path, class: "no-underline-link" %>
+              <%= link_to 'Articles', posts_path, class: "no-underline-link", id:"articles" %>
             <% end %>
 
             <% @categories.each do |category| %>
@@ -50,7 +50,7 @@
             <% if current_user %>
               <% if can? :create, Post %>
                 <%= content_tag(:li) do %>
-                  <%= link_to new_post_path, class: "mx-1 no-underline-link" do %>
+                  <%= link_to new_post_path, class: "mx-1 no-underline-link", id:'add_article_link' do %>
                     <i class='bx bx-message-square-add bx-md'></i>
                   <% end %>
                 <% end %>
@@ -58,13 +58,13 @@
 
               <% if can? :create, Tag %>
                 <%= content_tag(:li) do %>
-                  <%= link_to 'New Tag', new_tag_path, class: "mx-1 no-underline-link" %>
+                  <%= link_to 'New Tag', new_tag_path, class: "mx-1 no-underline-link", id:"add_tag" %>
                 <% end %>
               <% end %>
 
               <% if can? :create, Category %>
                 <%= content_tag(:li) do %>
-                  <%= link_to 'Add Category', new_category_path, class: "mx-1 no-underline-link" %>
+                  <%= link_to 'Add Category', new_category_path, class: "mx-1 no-underline-link", id:"add_category" %>
                 <% end %>
               <% end %>
 

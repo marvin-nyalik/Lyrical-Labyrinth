@@ -1,6 +1,6 @@
 <div class="container">
   <% if @first_post %>
-    <%= link_to @first_post do %>
+    <%= link_to @first_post, id:"post_link" do %>
     <div style="position: relative; width: 97%; margin: 10px auto;">
       <img src=<%= @first_post.photo_url %> 
            alt="<%= @first_post.photo_url %>" 
