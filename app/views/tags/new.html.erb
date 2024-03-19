@@ -1,13 +1,14 @@
 <%= form_with model:@tag, url: tags_path, method: :post do |form| %>
+    <h1>Add New Tag</h1>
     <div class="field">
         <%= form.label :name %>
-        <%= form.text_field :name, required: true %>
+        <%= form.text_field :name, required: true, id:"name_field", class:"form-control" %>
     </div>
 
     <div class="field">
         <%= form.label :description %>
-        <%= form.text_area :desc, required: true %>
+        <%= form.text_area :desc, required: true, id:"desc_field", class:"form-control" %>
     </div>
 
-    <%= form.submit 'Create Tag' %>
+    <%= form.submit 'Create Tag', class:"btn btn-success my-2" %>
 <% end %>
