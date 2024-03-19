@@ -16,12 +16,12 @@
 
         <div class="field form-group my-1">
             <%= form.label :category_id, 'Select Category', class:"fw-bold" %>
-            <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select appropriate Category' }, required: true, class:"form-control" %>
+            <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select appropriate Category' }, required: true, class:"form-control", id:"category_id" %>
         </div>
 
         <div class="field form-group my-1">
             <%= form.label :tag_ids, 'Include Topics [Select all that apply]', class:"fw-bold" %> <br>
-            <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, { prompt: 'Include tags' }, class:"form-check-input", style:"display: block; margin-right: 5px;" %>
+            <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, { prompt: 'Include tags' }, class:"form-check-input", style:"display: block; margin-right: 5px;", id:"tag_ids" %>
         </div>
 
         <div class="field form-group my-2" id="body_field">
