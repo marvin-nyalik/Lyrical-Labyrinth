@@ -1,7 +1,12 @@
+require 'rails_helper'
+
 RSpec.describe Notification, type: :model do
   it 'Contains a valid factory' do
-    comment = FactoryBot.build(:comment)
-    notification = FactoryBot.build(:notification, notifiable: comment)
+    user = FactoryBot.create(:user)
+    comment = FactoryBot.create(:comment, user:)
+
+    notification = FactoryBot.build(:notification, user:, notifiable_id: comment.id, notifiable_type: 'Comment')
+
     expect(notification).to be_valid
   end
 end
