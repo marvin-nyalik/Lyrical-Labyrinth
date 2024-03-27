@@ -62,20 +62,23 @@ gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'brakeman'
+  gem 'bundler-audit'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'ruby_audit'
   gem 'selenium-webdriver'
 end
 
-group :test do
-  gem 'brakeman'
-  gem 'bundler-audit'
-  gem 'rubocop-rails'
-  gem 'ruby_audit'
-end
+# group :test do
+#   gem 'brakeman'
+#   gem 'bundler-audit'
+#   gem 'rubocop-rails'
+#   gem 'ruby_audit'
+# end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
