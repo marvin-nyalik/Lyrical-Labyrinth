@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
-RSpec.describe 'Add Article', type: :feature, :exclude_from_ci do
+RSpec.describe 'Add Article', type: :feature do
   before(:each) do
     FactoryBot.create(:user, email: 'user2@example.com', password: 'password', admin: true)
     visit new_user_session_path

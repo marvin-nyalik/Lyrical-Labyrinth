@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User authentication', type: :feature, :exclude_from_ci do
+RSpec.describe 'User authentication', type: :feature do
   it 'Allows User sign up' do
     visit new_user_registration_path
     fill_in 'email_field', with: 'user@example.com'

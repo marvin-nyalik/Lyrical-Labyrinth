@@ -11,6 +11,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rolify'
 gem 'rubocop', '>= 1.0', '< 2.0'
+gem 'rubocop-discourse', require: false
 gem 'sidekiq'
 gem 'trix'
 gem 'will_paginate'
