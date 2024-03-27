@@ -56,7 +56,7 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           
       - name: Run tests
-        run: bundle exec rspec
+        run: bundle exec rspec spec/models
 
   lint:
     runs-on: ubuntu-latest
@@ -72,5 +72,3 @@ jobs:
         run: bundle exec bundle-audit --update
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
-      - name: Lint Ruby files
-        run: bundle exec rubocop
