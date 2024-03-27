@@ -70,6 +70,13 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
+group :test do
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'rubocop-rails'
+  gem 'ruby_audit'
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
