@@ -35,7 +35,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true
+          bundler-cache: false
       # Add or replace database setup steps here
       - name: Set execute permissions for bin/rails
         run: chmod +x bin/rails
