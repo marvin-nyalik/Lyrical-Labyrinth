@@ -11,6 +11,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rolify'
 gem 'rubocop', '>= 1.0', '< 2.0'
+gem 'rubocop-discourse', require: false
 gem 'sidekiq'
 gem 'trix'
 gem 'will_paginate'
@@ -62,11 +63,14 @@ gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'brakeman'
+  gem 'bundler-audit'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'ruby_audit'
   gem 'selenium-webdriver'
 end
 
